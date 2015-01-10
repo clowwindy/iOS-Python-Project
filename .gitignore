@@ -1,0 +1,5 @@
+build
+.idea/
+project.xcworkspace/
+xcuserdata/
+.DS_STORE
