@@ -33,16 +33,15 @@ from myapp import web
 class PyAppDelegate(object):
     def __init__(self):
         # create a view controller
-        window = UIWindow.alloc().initWithFrame_(UIScreen.mainScreen().bounds)
+        self.window = UIWindow.alloc().initWithFrame_(UIScreen.mainScreen().bounds)
 
         tableview_controller = UITableViewController.alloc().init()
-        navigation_controller = UINavigationController.alloc().\
-            initWithRootViewController_(tableview_controller)
+        navigation_controller = UINavigationController.alloc().initWithRootViewController_(tableview_controller)
 
         tableview_controller.navigationItem.title = "My App"
 
-        window.rootViewController = navigation_controller
-        window.makeKeyAndVisible()
+        self.window.rootViewController = navigation_controller
+        self.window.makeKeyAndVisible()
 
         self.start_web_server()
 
