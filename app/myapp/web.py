@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Copyright (c) 2014 clowwindy
+# Copyright (c) 2015 clowwindy
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 from __future__ import absolute_import, division, print_function, \
-  with_statement
+    with_statement
 
 import logging
 import tornado.ioloop
@@ -29,16 +29,18 @@ import tornado.web
 
 
 class MainHandler(tornado.web.RequestHandler):
-  def get(self):
-    self.write("Hello, world\r\n")
+    def get(self):
+        self.write("Hello, world\r\n")
+
 
 def run_server():
-  from tornado.log import enable_pretty_logging
-  enable_pretty_logging()
-  application = tornado.web.Application([
-                                         (r"/", MainHandler),
-  ])
+    from tornado.log import enable_pretty_logging
 
-  application.listen(8888)
-  logging.info('starting server at 8888')
-  tornado.ioloop.IOLoop.instance().start()
+    enable_pretty_logging()
+    application = tornado.web.Application([
+        (r"/", MainHandler),
+    ])
+
+    application.listen(8888)
+    logging.info('starting server at 8888')
+    tornado.ioloop.IOLoop.instance().start()

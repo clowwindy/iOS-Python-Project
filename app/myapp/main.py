@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Copyright (c) 2014 clowwindy
+# Copyright (c) 2015 clowwindy
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,37 +20,25 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+
 from __future__ import absolute_import, division, print_function, \
-  with_statement
+    with_statement
 
 import threading
 import sys
-from ctypes import cdll
-from ctypes import util
-from ctypes import CDLL, c_char_p, c_int, c_long, byref,\
-  create_string_buffer, c_void_p
-from rubicon.objc import ObjCClass, objc_method
-from rubicon.objc.core_foundation import from_value, to_value
+from uikit import UIKit, NSObject, objc_method, from_value
 
 from myapp import web
 
 
-UIKit = cdll.LoadLibrary(util.find_library('UIKit'))
-UIKit.UIApplicationMain.restypes = (c_int, c_void_p, c_void_p,
-                                    c_void_p)
-UIKit.UIApplicationMain.restype = c_int
-NSObject = ObjCClass("NSObject")
-
-
 class MyAppDelegate(NSObject):
-  @objc_method('@B')
-  def application_didFinishLaunchingWithOptions_(self, launchOptions):
-    # You can't store attributes directly on the object -
-    # you need to put them manually on the Python object
-    
-    server_thread = threading.Thread(target=web.run_server)
-    server_thread.start()
-    return 0
+    @objc_method('@B')
+    def application_didFinishLaunchingWithOptions_(self, launchOptions):
+        server_thread = threading.Thread(target=web.run_server)
+        server_thread.start()
+        return 0
+
 
 if __name__ == '__main__':
-  sys.exit(UIKit.UIApplicationMain(0, None, None, from_value('MyAppDelegate')))
+    sys.exit(
+        UIKit.UIApplicationMain(0, None, None, from_value('MyAppDelegate')))

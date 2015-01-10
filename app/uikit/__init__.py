@@ -20,5 +20,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from __future__ import absolute_import, division, print_function, \
-with_statement
+
+from ctypes import cdll, c_int, c_void_p, util
+from rubicon.objc import ObjCClass, objc_method
+from rubicon.objc.core_foundation import from_value, to_value
+
+
+UIKit = cdll.LoadLibrary(util.find_library('UIKit'))
+UIKit.UIApplicationMain.restypes = (c_int, c_void_p, c_void_p,
+                                    c_void_p)
+UIKit.UIApplicationMain.restype = c_int
+NSObject = ObjCClass("NSObject")
