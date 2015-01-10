@@ -11,7 +11,7 @@ Develop
 - `/app` is the root of Python source code.
 - `/app/uikit` is a wrapper of UIKit in Python, aiming to provide a flexible app framework
 - `/app/myapp` is an example of an iOS app that builds on top of `uikit`, including example to
-[show a UITableView](https://github.com/clowwindy/iOS-Python-Project/blob/master/app/myapp/main.py)
+[show a UITableView](https://github.com/clowwindy/iOS-Python-Project/blob/master/app/myapp/ui.py)
 and [run a web server with tornado](https://github.com/clowwindy/iOS-Python-Project/blob/master/app/myapp/web.py)
 
 Todo
