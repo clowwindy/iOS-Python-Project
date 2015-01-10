@@ -20,24 +20,33 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+from __future__ import absolute_import, division, print_function, \
+    with_statement
 
-__all__ = ('UIKit', 'ObjCClass', 'objc_method', 'from_value', 'to_value',
-           'NSObject', 'NSString', 'NSArray', 'NSDictionary',
-           'UIResponder', 'UIScreen', 'UIView', 'UIViewController', 'UIWindow',
-           'UINavigationController', 'UITableViewController')
+import threading
 
+from uikit import *
 
-from ctypes import cdll, c_int, c_void_p, util
-from rubicon.objc import ObjCClass, objc_method
-from rubicon.objc.core_foundation import from_value, to_value
+from myapp import web
 
 
-UIKit = cdll.LoadLibrary(util.find_library('UIKit'))
-UIKit.UIApplicationMain.restypes = (c_int, c_void_p, c_void_p,
-                                    c_void_p)
-UIKit.UIApplicationMain.restype = c_int
+class PyAppDelegate(object):
+    def __init__(self):
+        # create a view controller
+        window = UIWindow.alloc().initWithFrame_(UIScreen.mainScreen().bounds)
 
+        tableview_controller = UITableViewController.alloc().init()
+        navigation_controller = UINavigationController.alloc().\
+            initWithRootViewController_(tableview_controller)
 
-for item in __all__:
-    if item not in globals():
-        globals()[item] = ObjCClass(item)
+        tableview_controller.navigationItem.title = "My App"
+
+        window.rootViewController = navigation_controller
+        window.makeKeyAndVisible()
+
+        self.start_web_server()
+
+    def start_web_server(self):
+        # start a tornado web server
+        server_thread = threading.Thread(target=web.run_server)
+        server_thread.start()

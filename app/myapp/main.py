@@ -24,21 +24,18 @@
 from __future__ import absolute_import, division, print_function, \
     with_statement
 
-import threading
 import sys
-from uikit import UIKit, NSObject, objc_method, from_value
+from uikit import *
+from myapp import ui
 
-from myapp import web
 
-
-class MyAppDelegate(NSObject):
+class ObjCAppDelegate(NSObject):
     @objc_method('@B')
     def application_didFinishLaunchingWithOptions_(self, launchOptions):
-        server_thread = threading.Thread(target=web.run_server)
-        server_thread.start()
+        self.__dict__['delegate'] = ui.PyAppDelegate()
         return 0
 
 
 if __name__ == '__main__':
     sys.exit(
-        UIKit.UIApplicationMain(0, None, None, from_value('MyAppDelegate')))
+        UIKit.UIApplicationMain(0, None, None, from_value('ObjCAppDelegate')))
