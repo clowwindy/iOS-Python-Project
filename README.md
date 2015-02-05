@@ -13,6 +13,7 @@ Develop
 - `/app/myapp` is an example of an iOS app that builds on top of `uikit`, including examples to
 [show a UITableView](https://github.com/clowwindy/iOS-Python-Project/blob/master/app/myapp/ui.py)
 and [run a web server with tornado](https://github.com/clowwindy/iOS-Python-Project/blob/master/app/myapp/web.py)
+- This project is based on [Python-iOS-template](https://github.com/pybee/Python-iOS-template) and [rubicon-objc](https://github.com/pybee/rubicon-objc)
 
 Todo
 ----
